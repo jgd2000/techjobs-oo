@@ -1,5 +1,6 @@
 package org.launchcode.models.forms;
 
+import org.hibernate.validator.constraints.NotEmpty;
 import org.launchcode.models.CoreCompetency;
 import org.launchcode.models.Employer;
 import org.launchcode.models.Location;
@@ -16,11 +17,25 @@ import java.util.ArrayList;
 public class JobForm {
 
     @NotNull
-    @Size(min=1, message = "Name may not be empty")
+    @NotEmpty(message = "Name may not be empty")
+
     private String name;
 
     @NotNull
     private int employerId;
+
+    @NotNull
+    private int locationId;
+
+    @NotNull
+    private int coreCompetencyId;
+
+    @NotNull
+    private int positionTypeId;
+//    @NotNull  works for String input
+//    @Size(min=1, message = "Location may not be empty")
+//    private String location;
+
 
     /*
         TODO #3 - Included other fields needed to create a job,
@@ -42,6 +57,9 @@ public class JobForm {
         */
 
         employers = jobData.getEmployers().findAll();
+        locations = jobData.getLocations().findAll();
+        coreCompetencies = jobData.getCoreCompetencies().findAll();
+        positionTypes = jobData.getPositionTypes().findAll();
 
     }
 
@@ -57,8 +75,32 @@ public class JobForm {
         return employerId;
     }
 
+    public int getLocationId() {
+        return locationId;
+    }
+
+    public int getCoreCompetencyId() {
+        return coreCompetencyId;
+    }
+
+    public int getPositionTypeId() {
+        return positionTypeId;
+    }
+
     public void setEmployerId(int employerId) {
         this.employerId = employerId;
+    }
+
+    public void setLocationId(int locationId) {
+        this.locationId = locationId;
+    }
+
+    public void setCoreCompetencyId(int coreCompetencyId) {
+        this.coreCompetencyId = coreCompetencyId;
+    }
+
+    public void setPositionTypeId(int positionTypeId) {
+        this.positionTypeId = positionTypeId;
     }
 
     public ArrayList<Employer> getEmployers() {
